@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins,generics,viewsets
 from .paginations import CustomPagination
+from employees.filters import EmployeeFilter
 
 @api_view(['GET','POST'])
 def studentsView(request):
@@ -171,7 +172,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     pagination_class = CustomPagination
-    filterset_fields = ['designation']
+    filterset_class = EmployeeFilter
 
 class BlogsView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
