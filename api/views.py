@@ -13,6 +13,8 @@ from rest_framework import mixins,generics,viewsets
 from .paginations import CustomPagination
 from employees.filters import EmployeeFilter
 from rest_framework.filters import SearchFilter,OrderingFilter
+from rest_framework.permissions import IsAuthenticated
+
 
 @api_view(['GET','POST'])
 def studentsView(request):
@@ -170,6 +172,7 @@ class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
  
 
 class EmployeeViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     pagination_class = CustomPagination
