@@ -14,6 +14,8 @@ from .paginations import CustomPagination
 from employees.filters import EmployeeFilter
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.permissions import IsAuthenticated
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
 
 
 @api_view(['GET','POST'])
@@ -198,3 +200,8 @@ class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset= Comment.objects.all()
     serializer_class = CommentSerializer 
     lookup_field = 'pk'
+
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
